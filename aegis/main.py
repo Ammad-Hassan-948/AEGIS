@@ -24,7 +24,7 @@ from typing import AsyncGenerator, Optional
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import RedirectResponse, StreamingResponse
 from pydantic import BaseModel
 
 import config as cfg
@@ -286,6 +286,11 @@ async def _stream_pipeline(patient_id: str, profile: PatientProfile) -> AsyncGen
 # ─────────────────────────────────────────────────────────────────────────────
 # Endpoints
 # ─────────────────────────────────────────────────────────────────────────────
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/docs")
+
 
 @app.get("/health")
 async def health():
