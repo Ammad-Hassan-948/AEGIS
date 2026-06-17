@@ -217,17 +217,15 @@ async def _stream_pipeline(patient_id: str, profile: PatientProfile) -> AsyncGen
     def _run_stream():
         events = []
         try:
-            # LangGraph stream() yields {node_name: {state_delta}} dicts
             for chunk in aegis_graph.stream(initial_state, stream_mode="updates"):
                 events.append(chunk)
-            # Also grab the full final state
             final = aegis_graph.invoke(initial_state)
             final_state_holder[0] = final
         except Exception as exc:
             error_holder[0] = str(exc)
         return events
 
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     node_events = await loop.run_in_executor(None, _run_stream)
 
     if error_holder[0]:
