@@ -1,0 +1,10 @@
+{
+  "chief_complaint": "Sore throat for 3 days",
+  "symptom_duration": "3 days",
+  "symptom_severity": 5,
+  "current_medications": ["Warfarin 5mg daily"],
+  "known_allergies": [],
+  "age": 45,
+  "weight_kg": 70.0,
+  "antibiotic_in_question": "Ciprofloxacin"
+}
