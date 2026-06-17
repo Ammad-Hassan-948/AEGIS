@@ -37,7 +37,7 @@ logging.basicConfig(level=logging.INFO)
 # SQLite — simple persistent cache
 # ─────────────────────────────────────────────────────────────────────────────
 
-_DB_PATH = os.path.join(os.path.dirname(__file__), "aegis_cache.db")
+_DB_PATH = os.path.join(os.environ.get("TMPDIR", "/tmp"), "aegis_cache.db")
 
 
 def _get_conn() -> sqlite3.Connection:
