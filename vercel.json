@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "aegis/app.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "aegis/main.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "aegis/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "aegis/app.py"
+    }
+  ]
+}

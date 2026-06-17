@@ -23,9 +23,14 @@ print("Pre-loading complete. Starting Gradio...", flush=True)
 
 from ui.gradio_app import create_app, CSS
 
+# Create the Gradio app
+demo = create_app()
+
+# Expose the underlying FastAPI app for serverless environments (like Vercel)
+app = demo.app
+
 if __name__ == "__main__":
-    app = create_app()
-    app.launch(
+    demo.launch(
         server_name="0.0.0.0",
         server_port=7860,
         share=False,
