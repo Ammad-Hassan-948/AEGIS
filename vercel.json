@@ -1,23 +1,13 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "aegis/app.py",
-      "use": "@vercel/python"
+      "source": "/api/(.*)",
+      "destination": "api/main.py"
     },
     {
-      "src": "aegis/main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "aegis/main.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "aegis/app.py"
+      "source": "/(.*)",
+      "destination": "api/index.py"
     }
   ]
 }
