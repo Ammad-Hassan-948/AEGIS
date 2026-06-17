@@ -8,13 +8,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Pre-warm ONNX/ChromaDB and compile the LangGraph in the main thread.
-# This must happen before Gradio spawns any worker/daemon threads — ONNX
-# InferenceSession creation is NOT thread-safe and will segfault if first
-# called from a background thread while the main thread is busy.
-print("Pre-loading ONNX embedding model and clinical knowledge base...", flush=True)
-from rag.vector_store import get_collection
-get_collection()  # creates ONNX session + ChromaDB client in main thread
+# Pre-warm the environment and compile the LangGraph in the main thread.
+# This must happen before Gradio spawns any worker/daemon threads.
+print("Pre-loading clinical knowledge base...", flush=True)
 
 print("Compiling LangGraph pipeline...", flush=True)
 from graph import aegis_graph  # noqa: F401 — side-effect: compiles the graph
